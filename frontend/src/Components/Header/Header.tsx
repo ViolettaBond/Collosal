@@ -1,5 +1,5 @@
 import { Photos } from '../../../Photos.ts';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import Button from '../Button/Button.tsx';
 
@@ -8,8 +8,10 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.container}>
                 <div className={styles.logo}>
-                    <img src={Photos.Icon.Buffer} alt="" />
-                    <p className={styles.logoText}>Collosal.</p>
+                    <a href="/">
+                        <img src={Photos.Icon.Buffer} alt="" />
+                        <p className={styles.logoText}>Collosal.</p>
+                    </a>
                 </div>
 
                 <nav className={styles.navigation}>
@@ -19,7 +21,9 @@ export default function Header() {
                     <NavLink to="/about">About</NavLink>
                 </nav>
 
-                <Button text="Contact" />
+                <Link to="/contact">
+                    <Button text="Contact" />
+                </Link>
             </div>
         </header>
     );

@@ -8,28 +8,32 @@
 
     .container {
         width: 100%;
-        max-width: 1026px;
+        max-width: 1506px;
         @include flex-center-between;
 
         .logo {
             @include flex-center;
-            gap: 1rem;
 
-            img {
-                width: 23px;
-                height: auto;
-            }
+            a {
+                display: flex;
+                gap: 1rem;
 
-            .logoText {
-                font-size: $fs-24;
-                font-weight: $fw-bold;
-                font-style: $DM;
-                color: $white;
+                img {
+                    width: 23px;
+                    height: auto;
+                }
+
+                .logoText {
+                    font-size: $fs-24;
+                    font-weight: $fw-bold;
+                    font-style: $DM;
+                    color: $white;
+                }
             }
         }
 
         .navigation {
-            width: 45%;
+            width: 35%;
             @include flex-center-between;
 
             a {

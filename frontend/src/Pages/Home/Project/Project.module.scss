@@ -1,0 +1,99 @@
+@use '../../../Styles/mixin' as *;
+@use '../../../Styles/variables' as *;
+
+.project {
+    width: 100%;
+    max-width: 1024px;
+    @include flex-column-center;
+    gap: 3rem;
+
+    .eyebrown {
+        color: $green;
+        font-size: $fs-16;
+        font-weight: $fw-semibold;
+    }
+
+    .title {
+        text-align: center;
+        width: 70%;
+        font-size: $fs-30;
+        font-weight: $fw-bold;
+    }
+
+    .cards {
+        @include flex-center-between;
+        gap: 3rem;
+
+        .cardInner {
+            width: 502px;
+            height: 636px;
+
+            .card {
+                width: 100%;
+                height: 431px;
+                background: $cardDark;
+                border: 1px solid $btnLight;
+                border-radius: 3px;
+                @include flex-column-between-center;
+
+                .skeletons {
+                    width: 100%;
+                    margin-top: 4rem;
+                    @include flex-column-center;
+                    gap: 2rem;
+
+                    .skeletonLong,
+                    .skeletonShort {
+                        background: $skeleton;
+                        border-radius: 100px;
+                    }
+
+                    .skeletonLong {
+                        padding: 1.5rem 10rem;
+                    }
+
+                    .skeletonShort {
+                        padding: 1.5rem 6rem;
+                    }
+                }
+
+                .mobileSkeleton {
+                    width: fit-content;
+                    background: $skeleton;
+                    padding: 12rem 10rem;
+                    border-radius: 38px 38px 0px 0px;
+                }
+
+                .tableSkeleton {
+                    width: fit-content;
+                    background: $skeleton;
+                    padding: 12rem 18rem;
+                    border-radius: 38px 38px 0px 0px;
+                }
+            }
+
+            .detail {
+                width: 100%;
+                @include flex-column-center;
+                padding: 2rem 0;
+                gap: 4rem;
+
+                .detailText {
+                    @include flex-column-center;
+                    gap: 2rem;
+
+                    .heading {
+                        font-size: $fs-20;
+                        font-weight: $fw-bold;
+                    }
+
+                    .text {
+                        font-size: $fs-16;
+                        font-weight: $fw-regular;
+                        color: $white60;
+                    }
+                }
+            }
+        }
+    }
+}

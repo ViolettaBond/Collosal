@@ -3,7 +3,7 @@ import styles from './Button.module.scss';
 
 interface ButtonProps {
     text: string;
-    variant?: 'default' | 'purple';
+    variant?: 'default' | 'purple' | 'border' | 'white';
     bgColor?: string;
     textColor?: string;
     onClick?: () => void;
@@ -16,7 +16,9 @@ const Button: React.FC<ButtonProps> = ({
     textColor,
     onClick,
 }) => {
-    const buttonClasses = `${styles.btn} ${variant === 'purple' ? styles.purple : ''}`;
+    const variantClass = styles[variant] || '';
+
+    const buttonClasses = `${styles.btn} ${variantClass}`.trim();
 
     const customStyles = {
         '--bg-color': bgColor,

@@ -1,0 +1,61 @@
+import { useEffect, useState } from 'react';
+import styles from './Testimonials.module.scss';
+import Testimonial from '../../../Components/Testimonial/Testimonial';
+import type { TestimonialType } from './TestimonialType';
+
+const VISIBLE = 3;
+
+export default function Testimonials() {
+    const [items, setItems] = useState<TestimonialType[]>([]);
+    const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/testimonials')
+            .then((r) => r.json())
+            .then((data) => setItems(data))
+            .catch(console.error)
+            .finally(() => setLoading(false));
+    }, []);
+
+    if (loading) return <div className={styles.loader}>Loading...</div>;
+    if (!items.length) return null;
+
+    const pagesCount = Math.ceil(items.length / VISIBLE);
+
+    return (
+        <section className={styles.wrapper}>
+            <div className={styles.header}>
+                <span className={styles.label}>Testimonial</span>
+                <h2 className={styles.title}>
+                    What do our clients say that we
+                    <br />
+                    never let down?
+                </h2>
+            </div>
+
+            <div className={styles.viewport}>
+                <div
+                    className={styles.track}
+                    style={{
+                        transform: `translateX(-${page * 100}%)`,
+                    }}>
+                    {items.map((item) => (
+                        <Testimonial key={item.id} data={item} />
+                    ))}
+                </div>
+            </div>
+
+            <div className={styles.dots}>
+                {Array.from({ length: pagesCount }).map((_, i) => (
+                    <button
+                        key={i}
+                        className={`${styles.dot} ${i === page ? styles.dotActive : ''}`}
+                        onClick={() => setPage(i)}
+                        aria-label={`Page ${i + 1}`}
+                    />
+                ))}
+            </div>
+        </section>
+    );
+}

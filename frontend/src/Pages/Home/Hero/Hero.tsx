@@ -1,5 +1,6 @@
 import styles from './Hero.module.scss';
 import Button from '../../../Components/Button/Button';
+import { NavLink } from 'react-router-dom';
 
 export default function Hero() {
     return (
@@ -20,8 +21,13 @@ export default function Hero() {
                 </div>
 
                 <div className={styles.btnHero}>
-                    <Button text="Send Quote" variant="purple" />
-                    <Button text="Learn More" />
+                    <NavLink to="/quote">
+                        <Button text="Send Quote" variant="purple" />
+                    </NavLink>
+
+                    <NavLink to="/about">
+                        <Button text="Learn More" />
+                    </NavLink>
                 </div>
             </div>
         </section>

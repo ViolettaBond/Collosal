@@ -19,6 +19,7 @@ body {
     user-select: none;
     background-image: url(../src/assets/bg.png);
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 ul,
