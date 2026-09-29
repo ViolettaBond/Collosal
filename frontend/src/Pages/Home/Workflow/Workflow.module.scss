@@ -3,7 +3,7 @@
 
 .workflow {
     width: 100%;
-    max-width: 1024px;
+    max-width: $max-width;
     @include flex-column-center;
 
     .cards {

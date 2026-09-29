@@ -5,7 +5,7 @@ export default function HowWeWork() {
     return (
         <>
             <section className={styles.howWeWork}>
-                <img src={Photos.HowWeWork} alt="" />
+                <img src={Photos.HowWeWork} alt="" loading="lazy" />
 
                 <div className={styles.infoWork}>
                     <span className={styles.eyebrown}>HOW WE WORK?</span>

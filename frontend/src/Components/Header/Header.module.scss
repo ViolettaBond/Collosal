@@ -24,7 +24,7 @@
                 }
 
                 .logoText {
-                    font-size: $fs-24;
+                    font-size: $fs-26;
                     font-weight: $fw-bold;
                     font-style: $DM;
                     color: $white;
@@ -33,12 +33,12 @@
         }
 
         .navigation {
-            width: 35%;
+            width: 40%;
             @include flex-center-between;
 
             a {
                 color: $white80;
-                font-size: $fs-16;
+                font-size: $fs-20;
                 transition: color 0.2s ease;
             }
 

@@ -12,7 +12,9 @@
   "dependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-markdown": "^10.1.0",
     "react-router-dom": "^7.18.4",
+    "remark-gfm": "^4.0.1",
     "sass": "^1.105.0"
   },
   "devDependencies": {
@@ -25,6 +27,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "oxlint": "^1.81.0",
+    "sharp-cli": "^6.1.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }

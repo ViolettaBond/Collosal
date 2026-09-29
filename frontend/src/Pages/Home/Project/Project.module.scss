@@ -5,6 +5,7 @@
     width: 100%;
     max-width: 1024px;
     @include flex-column-center;
+    margin-bottom: 6rem;
     gap: 3rem;
 
     .eyebrown {
@@ -21,66 +22,101 @@
     }
 
     .cards {
-        @include flex-center-between;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
         gap: 3rem;
+        width: 100%;
 
         .cardInner {
-            width: 502px;
-            height: 636px;
+            display: flex;
+            flex-direction: column;
+
+            &.cardInner_mobile {
+                width: 480px;
+                max-width: 480px;
+            }
+
+            &.cardInner_desktop {
+                width: 480px;
+                max-width: 480px;
+            }
 
             .card {
                 width: 100%;
-                height: 431px;
+                min-height: 431px;
                 background: $cardDark;
                 border: 1px solid $btnLight;
                 border-radius: 3px;
-                @include flex-column-between-center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                overflow: hidden;
 
                 .skeletons {
                     width: 100%;
                     margin-top: 4rem;
-                    @include flex-column-center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                     gap: 2rem;
 
                     .skeletonLong,
                     .skeletonShort {
                         background: $skeleton;
                         border-radius: 100px;
+                        height: 2.4rem;
                     }
 
                     .skeletonLong {
-                        padding: 1.5rem 10rem;
+                        width: 60%;
                     }
-
                     .skeletonShort {
-                        padding: 1.5rem 6rem;
+                        width: 35%;
                     }
+                }
+
+                .mobileSkeleton,
+                .tabletSkeleton,
+                .tableSkeleton {
+                    background: $skeleton;
+                    border-radius: 38px 38px 0 0;
+                    align-self: center;
+                    height: 260px;
+                    margin-bottom: -1px;
                 }
 
                 .mobileSkeleton {
-                    width: fit-content;
-                    background: $skeleton;
-                    padding: 12rem 10rem;
-                    border-radius: 38px 38px 0px 0px;
+                    width: 45%;
+                }
+
+                .tabletSkeleton {
+                    width: 65%;
                 }
 
                 .tableSkeleton {
-                    width: fit-content;
-                    background: $skeleton;
-                    padding: 12rem 18rem;
-                    border-radius: 38px 38px 0px 0px;
+                    width: 85%;
                 }
             }
 
             .detail {
                 width: 100%;
-                @include flex-column-center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 padding: 2rem 0;
                 gap: 4rem;
 
                 .detailText {
-                    @include flex-column-center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                     gap: 2rem;
+                    text-align: center;
+                    padding: 0 1rem;
+                    color: $white;
 
                     .heading {
                         font-size: $fs-20;

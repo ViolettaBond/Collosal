@@ -22,7 +22,7 @@ export default function OurTeam() {
                     <Button text="See Our Teams" />
                 </div>
 
-                <img src={Photos.TeamIllustration} alt="" />
+                <img src={Photos.TeamIllustration} alt="" loading="lazy" />
             </section>
         </>
     );

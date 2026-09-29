@@ -3,9 +3,9 @@ import type { TestimonialType } from '../../Pages/Home/Testimonials/TestimonialT
 import { Photos } from '../../../Photos';
 
 const avatarMap: Record<string, string> = {
-    avatar1: Photos.Avatar.Avatar1,
-    avatar2: Photos.Avatar.Avatar2,
-    avatar3: Photos.Avatar.Avatar3,
+    Avatar1: Photos.Avatar.Avatar1,
+    Avatar2: Photos.Avatar.Avatar2,
+    Avatar3: Photos.Avatar.Avatar3,
 };
 
 interface Props {

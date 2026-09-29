@@ -1,50 +1,21 @@
-import { useEffect, useState } from 'react';
 import styles from './GetStarted.module.scss';
 import type { PricingPlan } from './types';
 import Button from '../../../Components/Button/Button';
 
-export default function GetStarted() {
-    const [plans, setPlans] = useState<PricingPlan[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+type Props = {
+    plans: PricingPlan[] | null;
+};
 
-    useEffect(() => {
-        const controller = new AbortController();
-
-        async function load() {
-            try {
-                const res = await fetch('http://localhost:5000/pricing-plans', {
-                    signal: controller.signal,
-                });
-
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-                const data: PricingPlan[] = await res.json();
-                setPlans(data);
-            } catch (e) {
-                if ((e as Error).name !== 'AbortError') {
-                    setError('Не удалось загрузить тарифы');
-                    console.error(e);
-                }
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        load();
-        return () => controller.abort();
-    }, []);
-
+export default function GetStarted({ plans }: Props) {
     return (
         <section className={styles.getStarted}>
             <span className={styles.eyebrow}>GET STARTED</span>
             <h2 className={styles.title}>What do you need? Choose a service that can help you</h2>
 
-            {loading && <p className={styles.state}>Загрузка…</p>}
-            {error && <p className={styles.state}>{error}</p>}
+            {!plans && <p className={styles.state}>Загрузка…</p>}
 
             <div className={styles.grid}>
-                {plans.map((plan) => (
+                {plans?.map((plan) => (
                     <article
                         key={plan.id}
                         className={styles.card}

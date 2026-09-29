@@ -142,7 +142,9 @@ app.get('/blog-posts/:id/responses', async (req, res) => {
     try {
         const { id } = req.params;
         const result = await pool.query(
-            'SELECT * FROM blog_responses WHERE post_id = $1 ORDER BY created_at',
+            `SELECT * FROM blog_responses
+             WHERE post_id = $1 AND is_approved = TRUE
+             ORDER BY created_at`,
             [id],
         );
         res.json(result.rows);
@@ -159,13 +161,68 @@ app.post('/blog-posts/:id/responses', async (req, res) => {
 
         const result = await pool.query(
             `INSERT INTO blog_responses
-             (post_id, author_name, author_avatar, author_role, text, email)
+             (post_id, author_name, author_avatar, author_role, email, text)
              VALUES ($1, $2, $3, $4, $5, $6)
              RETURNING id`,
-            [id, name, 'Avatar4', 'User', comment, email],
+            [id, name, 'Avatar4', 'User', email, comment],
         );
 
         res.status(201).json({ id: result.rows[0].id });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Ошибка' });
+    }
+});
+
+app.get('/projects', async (req, res) => {
+    try {
+        const exclude = req.query.exclude;
+        const category = req.query.category as string | undefined;
+
+        const conditions: string[] = [];
+        const params: (string | number)[] = [];
+
+        if (category && category !== 'all') {
+            params.push(category);
+            conditions.push(`category = $${params.length}`);
+        }
+
+        if (exclude) {
+            params.push(Number(exclude));
+            conditions.push(`id <> $${params.length}`);
+        }
+
+        const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+        const query = `SELECT * FROM projects ${where} ORDER BY id`;
+
+        const result = await pool.query(query, params);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Ошибка' });
+    }
+});
+
+app.get('/projects/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await pool.query('SELECT * FROM projects WHERE id = $1', [id]);
+
+        if (!result.rows.length) {
+            return res.status(404).json({ message: 'Not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Ошибка' });
+    }
+});
+
+app.get('/team', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM team ORDER BY sort_order, id');
+        res.json(result.rows);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Ошибка' });

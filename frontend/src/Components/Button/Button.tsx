@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
@@ -7,6 +8,7 @@ interface ButtonProps {
     bgColor?: string;
     textColor?: string;
     onClick?: () => void;
+    to?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,15 +17,23 @@ const Button: React.FC<ButtonProps> = ({
     bgColor,
     textColor,
     onClick,
+    to,
 }) => {
     const variantClass = styles[variant] || '';
-
     const buttonClasses = `${styles.btn} ${variantClass}`.trim();
 
     const customStyles = {
         '--bg-color': bgColor,
         '--text-color': textColor,
     } as React.CSSProperties;
+
+    if (to) {
+        return (
+            <Link to={to} className={buttonClasses} style={customStyles}>
+                {text}
+            </Link>
+        );
+    }
 
     return (
         <button className={buttonClasses} style={customStyles} onClick={onClick}>

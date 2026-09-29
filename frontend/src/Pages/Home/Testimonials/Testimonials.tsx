@@ -1,24 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './Testimonials.module.scss';
 import Testimonial from '../../../Components/Testimonial/Testimonial';
 import type { TestimonialType } from './TestimonialType';
 
 const VISIBLE = 3;
 
-export default function Testimonials() {
-    const [items, setItems] = useState<TestimonialType[]>([]);
+type Props = {
+    items: TestimonialType[] | null;
+};
+
+export default function Testimonials({ items }: Props) {
     const [page, setPage] = useState(0);
-    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/testimonials')
-            .then((r) => r.json())
-            .then((data) => setItems(data))
-            .catch(console.error)
-            .finally(() => setLoading(false));
-    }, []);
+    if (!items) {
+        return <div className={styles.loader}>Loading...</div>;
+    }
 
-    if (loading) return <div className={styles.loader}>Loading...</div>;
     if (!items.length) return null;
 
     const pagesCount = Math.ceil(items.length / VISIBLE);

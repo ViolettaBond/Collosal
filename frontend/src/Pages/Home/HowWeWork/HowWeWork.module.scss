@@ -3,7 +3,7 @@
 
 .howWeWork {
     width: 100%;
-    max-width: 1066px;
+    max-width: $max-width;
     @include flex-center-between;
 
     img {
